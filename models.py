@@ -17,19 +17,24 @@ sample_links = {0: [1],
                 2: [1, 3],
                 3: [2]}
 
-sample_motion = [[90, 90, 90, 90],
-                 [45, 90, 90, 45],
-                 [135, 90, 90, 135],
-                 [135, 90, 90, 45],
-                 [90, 0, 0, 90],
-                 [90, 180, 180, 90]]
+sample_servos = {0: outPinA,
+                 1: outPinB,
+                 2: outPinC,
+                 3: outPinD}
+
+sample_motions = [[90, 90, 90, 90],
+                  [45, 90, 90, 45],
+                  [135, 90, 90, 135],
+                  [135, 90, 90, 45],
+                  [90, 0, 0, 90],
+                  [90, 180, 180, 90]]
 
 
 class Joint:
     """
 
     """
-    def __init__(self, name, servo, angle):
+    def __init__(self, name, servo, angle=0):
         self.name = name
         self.servo = servo
         self.angle = angle
@@ -44,15 +49,23 @@ class Joint:
 class Skeleton:
     """
     """
-    def __init__(self, jointNum, jointLinks, jointNames):
+    def __init__(self, jointNames, jointLinks, jointServos):
         """
         jointNum = number of joints
         jointLinks = dictionary that contains linkage between joints
         jointNames = dictionary that maps names to each joint
         """
-        for _ in range(numJoints):
 
+        self.jointNames = jointNames
+        self.jointLinks = jointLinks
+        self.jointNum = len(jointLinks.keys())
+        self.jointServos = jointServos
 
-    def readMotion(self, motion):
+        self.joints = []
+        for i in range(self.jointNum):
+            newJoint = Joint(jointNames[i], jointServos[i])
+            self.joints.append(newJoint)
 
     def actuateMotion(self, motion):
+        for i, angle in enumerate(motion):
+            self.joints[i].updateAngle(angle)
