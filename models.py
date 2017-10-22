@@ -17,10 +17,10 @@ sample_links = {0: [1],
                 2: [1, 3],
                 3: [2]}
 
-sample_servos = {0: outPinA,
-                 1: outPinB,
-                 2: outPinC,
-                 3: outPinD}
+sample_servos = {0: "outPinA",
+                 1: "outPinB",
+                 2: "outPinC",
+                 3: "outPinD"}
 
 sample_motions = [[90, 90, 90, 90],
                   [45, 90, 90, 45],
@@ -44,6 +44,9 @@ class Joint:
 
     def updateName(self, name):
         self.name = name
+
+    def __str__(self):
+        return self.name + ", " + self.servo + ", " + str(self.angle)
 
 
 class Skeleton:

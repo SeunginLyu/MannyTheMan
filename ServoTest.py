@@ -9,12 +9,6 @@ outPinB = 3
 outPinC = 4
 outPinD = 7
 
-skeleton = models.Skeleton(models.sample_names,
-                           models.sample_links,
-                           models.sample_servos)
-
-skeleton.actuateMotion(models.sample_motions[0])
-
 GPIO.setmode(GPIO.BCM)
 
 GPIO.setup(outPinA, GPIO.OUT)
