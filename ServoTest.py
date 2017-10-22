@@ -1,7 +1,9 @@
 import RPi.GPIO as GPIO
+import models
 
 from time import sleep
 
+# RaspberryPi Pin initialization
 outPinA = 2
 outPinB = 3
 outPinC = 4
@@ -14,12 +16,12 @@ GPIO.setup(outPinB, GPIO.OUT)
 GPIO.setup(outPinC, GPIO.OUT)
 GPIO.setup(outPinD, GPIO.OUT)
 
-pwm=GPIO.PWM(outPinD, 50)
-
+pwm = GPIO.PWM(outPinD, 50)
 pwm.start(0)
 
 
-def SetAngle(angle, pin):
+
+def setServoAngle(angle, pin):
     duty = angle / 18 + 2
 
     GPIO.output(pin, True)
@@ -29,10 +31,11 @@ def SetAngle(angle, pin):
     GPIO.output(pin, False)
     pwm.ChangeDutyCycle(0)
 
-SetAngle(90, outPinA)
-SetAngle(90, outPinB)
-SetAngle(90, outPinC)
-SetAngle(90, outPinD)
+
+setServoAngle(90, outPinA)
+setServoAngle(90, outPinB)
+setServoAngle(90, outPinC)
+setServoAngle(90, outPinD)
 
 pwm.stop()
 GPIO.cleanup()
