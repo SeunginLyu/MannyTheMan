@@ -17,10 +17,10 @@ sample_links = {0: [1],
                 2: [1, 3],
                 3: [2]}
 
-sample_servos = {0: "outPinA",
-                 1: "outPinB",
-                 2: "outPinC",
-                 3: "outPinD"}
+sample_servos = {0: 2,
+                 1: 3,
+                 2: 4,
+                 3: 7}
 
 sample_motions = [[90, 90, 90, 90],
                   [45, 90, 90, 45],
