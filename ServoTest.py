@@ -1,7 +1,6 @@
 import RPi.GPIO as GPIO
 import models
-
-from time import sleep
+import time
 
 # RaspberryPi Pin initialization
 outPinA = 2
@@ -27,18 +26,28 @@ skeleton.actuateMotion(models.sample_motions[1])
 # def setServoZero(pin):
 #     pwm =
 
-def setServoAngle(angle, pin):
-    pwm = GPIO.PWM(pin, angle)
-    pwm.start(0)
-    # duty = angle / 18 + 2
-    duty = 100
-    GPIO.output(pin, True)
-    pwm.ChangeDutyCycle(duty)
-    # sleep(1)
-    # pwm.ChangeDutyCycle(0)
-    # pwm.stop()
-    # GPIO.output(pin, False)
+# def setServoAngle(angle, pin):
+#     pwm = GPIO.PWM(pin, angle)
+#     pwm.start(0)
+#     # duty = angle / 18 + 2
+#     duty = 100
+#     GPIO.output(pin, True)
+#     pwm.ChangeDutyCycle(duty)
+#     # sleep(1)
+#     # pwm.ChangeDutyCycle(0)
+#     # pwm.stop()
+#     # GPIO.output(pin, False)
+#
 
+refresh_period = 0.02
+
+
+def setServoAngle(angle, pin):
+    for i in range(1, 100):
+        GPIO.output(pin, False)
+        time.sleep(0.001)
+        GPIO.output(pin, True)
+        time.sleep(refresh_period)
 
 for joint in skeleton.joints:
     setServoAngle(170, joint.servo)
