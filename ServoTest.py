@@ -26,28 +26,28 @@ skeleton.actuateMotion(models.sample_motions[1])
 # def setServoZero(pin):
 #     pwm =
 
-# def setServoAngle(angle, pin):
-#     pwm = GPIO.PWM(pin, angle)
-#     pwm.start(0)
-#     # duty = angle / 18 + 2
-#     duty = 100
-#     GPIO.output(pin, True)
-#     pwm.ChangeDutyCycle(duty)
-#     # sleep(1)
-#     # pwm.ChangeDutyCycle(0)
-#     # pwm.stop()
-#     # GPIO.output(pin, False)
-#
+def setServoAngle(angle, pin):
+    pwm = GPIO.PWM(pin, angle)
+    pwm.start(0)
+    duty = angle / 18 + 2
+    GPIO.output(pin, True)
+    pwm.ChangeDutyCycle(5)
+    time.sleep(1)
+    GPIO.output(pin, False)
+    pwm.ChangeDutyCycle(0)
+    pwm.stop()
+
 
 refresh_period = 0.02
 
 
-def setServoAngle(angle, pin):
-    for i in range(1, 100):
-        GPIO.output(pin, False)
-        time.sleep(0.001)
-        GPIO.output(pin, True)
-        time.sleep(refresh_period)
+# def setServoAngle(angle, pin):
+#     for _ in range(1, 100):
+#         GPIO.output(pin, False)
+#         time.sleep(0.001)
+#         GPIO.output(pin, True)
+#         time.sleep(refresh_period)
+#
 
 for joint in skeleton.joints:
     setServoAngle(170, joint.servo)
