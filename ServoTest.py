@@ -30,10 +30,11 @@ skeleton.actuateMotion(models.sample_motions[1])
 def setServoAngle(angle, pin):
     pwm = GPIO.PWM(pin, angle)
     pwm.start(0)
-    duty = angle / 18 + 2
+    # duty = angle / 18 + 2
+    duty = 100
     GPIO.output(pin, True)
     pwm.ChangeDutyCycle(duty)
-    sleep(0.3)
+    sleep(1)
     pwm.ChangeDutyCycle(0)
     pwm.stop()
     GPIO.output(pin, False)
