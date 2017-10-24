@@ -20,7 +20,7 @@ sample_links = {0: [1],
 sample_servos = {0: 2,
                  1: 3,
                  2: 4,
-                 3: 7}
+                 3: 17}
 
 sample_motions = [[90, 90, 90, 90],
                   [45, 90, 90, 45],

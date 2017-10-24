@@ -7,7 +7,7 @@ from time import sleep
 outPinA = 2
 outPinB = 3
 outPinC = 4
-outPinD = 7
+outPinD = 17
 
 GPIO.setmode(GPIO.BCM)
 
@@ -17,8 +17,8 @@ GPIO.setup(outPinB, GPIO.OUT)
 GPIO.setup(outPinC, GPIO.OUT)
 GPIO.setup(outPinD, GPIO.OUT)
 
-pwm = GPIO.PWM(outPinD, 50)
-pwm.start(0)
+# pwm = GPIO.PWM(outPinD, 50)
+# pwm.start(0)
 
 skeleton = models.Skeleton(models.sample_names,
                            models.sample_links,
@@ -28,18 +28,19 @@ skeleton.actuateMotion(models.sample_motions[1])
 
 
 def setServoAngle(angle, pin):
+    pwm = GPIO.PWM(pin, angle)
+    pwm.start(0)
     duty = angle / 18 + 2
-
     GPIO.output(pin, True)
     pwm.ChangeDutyCycle(duty)
-    sleep(1)
-
+    sleep(0.3)
     GPIO.output(pin, False)
     pwm.ChangeDutyCycle(0)
-
+    pwm.stop()
+# setServoAngle(180, outPinD)
 
 for joint in skeleton.joints:
-    setServoAngle(joint.angle, joint.servo)
-
-pwm.stop()
+    setServoAngle(170, joint.servo)
+    print(170, joint.servo)
+#pwm.stop()
 GPIO.cleanup()
