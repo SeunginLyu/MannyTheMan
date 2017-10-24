@@ -34,10 +34,10 @@ def setServoAngle(angle, pin):
     duty = 100
     GPIO.output(pin, True)
     pwm.ChangeDutyCycle(duty)
-    sleep(1)
-    pwm.ChangeDutyCycle(0)
-    pwm.stop()
-    GPIO.output(pin, False)
+    # sleep(1)
+    # pwm.ChangeDutyCycle(0)
+    # pwm.stop()
+    # GPIO.output(pin, False)
 
 
 for joint in skeleton.joints:
