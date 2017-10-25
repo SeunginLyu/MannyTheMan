@@ -13,7 +13,7 @@ used = [False]*NUM_GPIO
 
 pi = pigpio.pi()
 
-Allpins = [1,2,3,4]
+Allpins = [1,2,3,17]
 
 
 for g in Allpins:
