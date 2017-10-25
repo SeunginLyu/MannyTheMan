@@ -37,12 +37,11 @@ def setServoAngle(angle, pin):
 
 refresh_period = 0.02
 
-#for joint in skeleton.joints:
-
- #   setServoAngle(0, joint.servo)
+for joint in skeleton.joints:
+    setServoAngle(0, joint.servo)
 
 for joint in skeleton.joints:
-    setServoAngle(joint.angle, 2)
+    setServoAngle(joint.angle, joint.servo)
     print(joint.angle, joint.servo)
 
 GPIO.cleanup()
