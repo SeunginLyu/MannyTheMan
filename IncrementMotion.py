@@ -28,7 +28,7 @@ skeleton.actuateMotion(models.sample_motions[2])
 
 def findDiff(current, desired):
 	c = []
-	for i in len(current):
+	for i in range(len(current)):
 		c.append(desired[i]-current[i])
 	return c
 
@@ -38,26 +38,34 @@ def setServoAngle(angle, pin):
     duty = angle / 18 + 2
     GPIO.output(pin, True)
     pwm.ChangeDutyCycle(duty)
-    time.sleep(1)
+    time.sleep(0.1)
     GPIO.output(pin, False)
     pwm.ChangeDutyCycle(0)
     pwm.stop()
 
 def incrementMotion(currentPositions, desiredPositions):
 	change = [0, 0, 0, 0]
-	done = false;
+	done = False;
 
-	while(!done):
+	while(not done):
 		count = 0
 		for joint in skeleton.joints:
-			count = count + 1
-			change[count] = findDiff( currentPositions, desiredPositions)
+			
+			change = findDiff( currentPositions, desiredPositions)
 			if (sum(change) == 0): 
-				done = true
+				done = True
+				print(done)
 			if (change[count] != 0):
 				if (change[count] < 0):
-					setServoAngle(currentPositions[i]-1, joint.servo)
+					setServoAngle(currentPositions[count]-5, joint.servo)
+					currentPositions[count] = currentPositions[count]-5
 				else:
-					setServoAngle(currentPositions[i]+1, joint.servo)
+					setServoAngle(currentPositions[count]+5, joint.servo)
+					print(currentPositions[count]+5)
+					currentPositions[count] = currentPositions[count]+5
+			
+			count = count + 1
 
-incrementMotion([0,0,0,0], [10,10,10,10])
+for joint in skeleton.joints:
+	setServoAngle(0, joint.servo)
+incrementMotion([0,0,0,0], [90,90,90,50])
