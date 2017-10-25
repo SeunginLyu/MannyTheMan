@@ -43,23 +43,21 @@ def setServoAngle(angle, pin):
     pwm.ChangeDutyCycle(0)
     pwm.stop()
 
+def incrementMotion(currentPositions, desiredPositions):
+	change = [0, 0, 0, 0]
+	done = false;
 
+	while(!done):
+		count = 0
+		for joint in skeleton.joints:
+			count = count + 1
+			change[count] = findDiff( currentPositions, desiredPositions)
+			if (sum(change) == 0): 
+				done = true
+			if (change[count] != 0):
+				if (change[count] < 0):
+					setServoAngle(currentPositions[i]-1, joint.servo)
+				else:
+					setServoAngle(currentPositions[i]+1, joint.servo)
 
-currentPositions = [0, 0, 0, 0]
-desiredPositions = [0, 0, 0, 0]
-change = [0, 0, 0, 0]
-done = false;
-
-while(!done):
-	count = 0
-	for joint in skeleton.joints:
-		count = count + 1
-		change[count] = findDiff( currentPositions, desiredPositions)
-		if (sum(change) == 0): 
-			done = true
-		if (change[count] < 0):
-			setServoAngle(currentPositions[i]-1, joint.servo)
-		else:
-			setServoAngle(currentPositions[i]+1, joint.servo)
-
-
+incrementMotion([0,0,0,0], [10,10,10,10])
