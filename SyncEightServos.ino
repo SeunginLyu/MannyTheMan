@@ -1,94 +1,62 @@
 /*************************************************** 
-  This is an example for our Adafruit 16-channel PWM & Servo driver
-  PWM test - this will drive 16 PWMs in a 'wave'
-
-  Pick one up today in the adafruit shop!
-  ------> http://www.adafruit.com/products/815
-
-  These displays use I2C to communicate, 2 pins are required to  
-  interface. For Arduino UNOs, thats SCL -> Analog 5, SDA -> Analog 4
-
-  Adafruit invests time and resources providing this open source code, 
-  please support Adafruit and open-source hardware by purchasing 
-  products from Adafruit!
-
-  Written by Limor Fried/Ladyada for Adafruit Industries.  
-  BSD license, all text above must be included in any redistribution
+  This is code for running multiple servos on teh Adafruit PWM 16 servo board. The code chnages 
+  servo positions with pulses of power.
  ****************************************************/
 
 #include <Wire.h>
 #include <Adafruit_PWMServoDriver.h>
-
-// called this way, it uses the default address 0x40
 Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
-// you can also call it with a different address you want
-//Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver(0x41);
-
-#if defined(ARDUINO_ARCH_SAMD)  
-// for Zero, output on USB Serial console, remove line below if using programming port to program the Zero!
-   #define Serial SerialUSB
-#endif
+#define SERVOMIN  150 // this is the 'minimum' pulse length count (out of 4096)
+#define SERVOMAX  600 // this is the 'maximum' pulse length count (out of 4096)
+int currentpositions[8];
+int desiredpositions[8];
 
 int numberOfServos = 8;
 
 void setup() {
-  // ESP8266 is a componet for getting commands over the internet
-  // It is not important for our use
-  // #ifdef and #endef mean if defined and end defined to make a concise if statement
-#ifdef ESP8266
-  Wire.pins(2, 14);   // ESP8266 can use any two pins, such as SDA to #2 and SCL to #14
-#endif
-  
   Serial.begin(9600);
-  Serial.println("16 channel PWM test!");
-
+  Serial.println("16 channel Servo test!");
   pwm.begin();
-  pwm.setPWMFreq(1600);  // This is the maximum PWM frequency
-  // The larger this number is the more pwm "hits" the system gets
+  pwm.setPWMFreq(60);  // Analog servos run at ~60 Hz updates
+  yield();
 
-#ifdef TWBR    // TWBR stands for Two Wire Bit Rate Register, it contorls the frequency of the clock (scl)
-// This is basically for having several devices talking together
-  uint8_t twbrbackup = TWBR;
-  TWBR = 12;
-#endif
-}
-
-
-void AngleSet( Servos, Angles ){
-  // This function takes an interger array of servos and an interger array of angles and moves them
-  // Drive each PWM in a 'wave'
-  // 4096 is the number of ticks in the run through
-  for (uint16_t i=0; i<4096; i += 8) {
-    // 4096 comes from the mathmatically relationship of a Analog to Digital Converter,
-    // The number represetns 12 bits of resolution since 2 ^ 12 = 4096
-    for (uint8_t pwmnum=0; pwmnum < sizeof(Servos); pwmnum++) {
-      // for each servo run a loop
-      pwm.setPWM(pwmnum, 0, (i + (4096/16)*pwmnum) % 4096 );
-      // This last value is the pulse length in the other example code
-      // You make this negative to go backwards
-      // setPWM takes the following arguments: pinNumber, tick time to go high out of 4096, tick time to go low out of 4096
-    }
+  // setting the intial positions to 0;
+  for(int p =0; p< sizeof(currentpositions); p++){
+    currentpositions[p] = 0;
+    desiredpositions[p] = 0;
   }
+
+  desiredpositions[1] = 400;
+  desiredpositions[3] = 600;
+
 }
 
-void incrementMotion(currentPositions, desiredPositions){
-  int[] change = {0,0,0,0,0,0,0,0}; // Right spaces are hard coded right now
-  //for(int m = 0; m < sizeof(currentPositions); m ++){
-  //  change[m] = desiredPositions[m] - currentPositions[m];
-  //}
+
+int AngleFind( int angle){
+
+  // This function takes an servo angle and returns the PWM value
+  return angle*2.6 + 135;
+  
+}
+
+void incrementMotion(){
+  int change[] = {0,0,0,0,0,0,0,0}; // Right spaces are hard coded right now
+  for(int m = 0; m < sizeof(currentpositions); m ++){
+    change[m] = desiredpositions[m] - currentpositions[m];
+  }  
   boolean done = false;
   while(!done){
     int count = 0;
+    
     for(int i= 1; i <= numberOfServos; i ++){
-      change[m] = desiredPositions[m] - currentPositions[m];
       if(sumArray(change) == 0){
         done = true;
       }
-      if(change[count] != 0){
-        if(change[count] < 0){
-          pwm.setPWM(pwmnum, 0, currentPosition[i] - 8 );
+      if(change[i] != 0){
+        if(change[i] < 0){
+          pwm.setPWM(i, 0, currentpositions[i] - 8 );
         }else{
-          pwm.setPWM(pwmnum, 0, currentPosition[i] + 8 );
+          pwm.setPWM(i, 0, currentpositions[i] + 8 );
         }
       }
       count++;
@@ -97,20 +65,25 @@ void incrementMotion(currentPositions, desiredPositions){
 }
 
 
-int[] sumArray(arrayToSum){
+
+int sumArray(int arrayToSum[]){
   int total = 0;
   for(int i = 0; i < sizeof(arrayToSum); i++){
     total = arrayToSum[i] + total;
   }
   return total;
 }
-  
-   
-int ServosToMove[] = {2, 3, 6};
-int AnglesToMove [] = {170, 300, 300}; // NEEDS TO BE CONVERTED FIRST for now it has to be between 150 and 600
-incrementMotion(AnglesToMomve, ServosToMove);
- 
 
+  int ServosToMove[] = {2, 3, 6};
 void loop() {
 
+
+  // NEEDS TO BE CONVERTED FIRST for now it has to be between 150 and 600
+  incrementMotion();
+  delay(1000);
+  Serial.println("SWITCH");
+  desiredpositions[1] = 200;
+  desiredpositions[3] = 200;
+  // If this dosen't work try updating currentpositions
+  delay(1000);
 }
