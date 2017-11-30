@@ -15,22 +15,15 @@ int numberOfServos = 8 + 1;
 int countInput = 0;
 int timeRec = millis();
 int count = 0;
+String input;
+boolean move = false;
 
 
 void setup() {
   Serial.begin(9600);
-  Serial.println("16 channel Servo test!");
   pwm.begin();
   pwm.setPWMFreq(60);  // Analog servos run at ~60 Hz updates
   yield();
-
-  // setting the intial positions to 0;
-  //for(int p =0; p< sizeof(currentpositions); p++){
-    //currentpositions[p] = 0;
-    //desiredpositions[p] = 0;
-  //}
-
-
 }
 
 
@@ -115,36 +108,37 @@ int sumArray(int arrayToSum[]){
 void loop() {
 
  if(Serial.available() && timeRec - millis() > 7000) {
-      timeRec = millis();
-      String input = Serial.readString();
-      byte delimIndex = input.indexOf(',');
-      int func = input.substring(0, delimIndex).toInt();
-      int value = input.substring(delimIndex+1).toInt();
-      desiredpositions[func] = AngleFind(value);
-      countInput = countInput + 1; 
-      Serial.print(value);
-      Serial.print(" ");
-      Serial.print(func);
-      Serial.println(" ");
+       timeRec = millis();
+       input = Serial.readString();
+       String holderString;
+       for(int n = 0; n < 8; n++){
+        if(n == 0){
+          holderString = input;
+        }
+        
+        byte index1 = holderString.indexOf(',');
+        int ServoNum = holderString.substring(0, index1).toInt();
+        holderString = holderString.substring(index1 + 1,holderString.length());
+        byte index2 = holderString.indexOf(',');
+        int AngleVal = holderString.substring(0, index2).toInt();
+        holderString = holderString.substring(index2 + 1,holderString.length());
+        desiredpositions[ServoNum] = AngleFind(AngleVal);
+        
+       }
 
-      
+       move = true;
 
      
   }
 
 
   
-   String input = "2,90,3,40,4,50,1,20,6,30,5,80,7,100,8,100";
+   //String input = "2,90,3,40,4,50,1,20,6,30,5,80,7,100,8,100";
+
    
-   for(int n = 0; n < 8; n++){
-    byte index1 = input.indexOf(',');
-    int ServoNum = input.substring(0, index1).toInt();
-    input.remove(0,(input.substring(0, index1)).length());
-    byte index2 = input.indexOf(',');
-    int AngleVal = input.substring(0, index2).toInt();
-    input.remove(0,(input.substring(0, index2)).length());
-    desiredpositions[ServoNum] = AngleFind(AngleVal);
-   }
+
+
+   
   //desiredpositions[0] = AngleFind(90);
   //desiredpositions[1] = AngleFind(90);
   /*desiredpositions[2] = AngleFind(90);
@@ -155,9 +149,11 @@ void loop() {
   desiredpositions[7] = AngleFind(90);
   countInput = 2;
   */
-  if(countInput == 2){
+  if(move){
          incrementMotion(); 
          countInput = 0;
+         Serial.print(input);
+         move = false;
          delay(500);
   }
 }
