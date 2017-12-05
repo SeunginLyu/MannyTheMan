@@ -1,0 +1,3 @@
+C:\Users\slyu\Documents\kinect-sdk\helloworld\WPFKinectSDK18\obj\Release\WPFKinectSDK18.csprojResolveAssemblyReference.cache
+C:\Users\slyu\Documents\kinect-sdk\helloworld\WPFKinectSDK18\obj\Release\App.g.cs
+C:\Users\slyu\Documents\kinect-sdk\helloworld\WPFKinectSDK18\obj\Release\WPFKinectSDK18_MarkupCompile.cache
