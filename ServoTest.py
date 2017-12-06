@@ -11,7 +11,6 @@ outPinD = 7
 
 GPIO.setmode(GPIO.BCM)
 
-# Initialies servo output pins
 GPIO.setup(outPinA, GPIO.OUT)
 GPIO.setup(outPinB, GPIO.OUT)
 GPIO.setup(outPinC, GPIO.OUT)
