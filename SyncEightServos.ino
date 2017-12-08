@@ -60,6 +60,12 @@ int AngleFind(int ang){
   }
 }
 
+void incrementMotionTest(){
+  for(int i= 1; i <= numberOfServos; i ++){
+    pwm.setPWM(i, 0, desiredpositions[i]);
+  }
+}
+
 void incrementMotion(){
   int holdpos[] = {0,0,0,0,0,0,0,0,0};
   int change[] = {0,0,0,0,0,0,0,0,0}; // Right spaces are hard coded right now
@@ -191,7 +197,7 @@ void loop() {
   countInput = 2;
   */
   if(move){
-         incrementMotion();
+         incrementMotionTest();
          veryStart = false; 
          countInput = 0;
          Serial.print(input);
