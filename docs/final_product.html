@@ -66,6 +66,7 @@
 								<li>.NET Framework 4 or Higher</li>
 								<li>(For Development Purpose Only) Visual Studio 2010 - 2017 with C++ or C# dependencies installed. </li>
 							</ul>
+
 							<h4>Kinect Joint Orientation Detecting : with Kinect SDK</h4>
 							<p><span class="image"><img src="images/kinect_example.png" alt="" /></span></p>
 							<p>Kinect SDK 1.8 for Windows provides a skeletal tracking module that allows Kinect to recognize people and follow their actions.
@@ -79,10 +80,14 @@
 							<p><span class="image"><img src="images/kinect_example4.png" alt="" /></span><span class="image"><img src="images/kinect_example5.png" alt="" /></span></p>
 							<p>The SDK provides two ways of accesing the the skeleton orientation (angles). One method provides a hierarchial rotation based on the joint relationships
 							defined on the skeleton joint structure, and the other method provides an absolute orientation in Kinect camera coordinates. The orientatation information is provided
-						  in form of quaternions and rotation matrices. In this program, since we are using only the 2D orientation,  </p>
+						  in form of quaternions and rotation matrices. In this program, we use the hierarchial rotation information because we actuate the servos in orientations that are releative to their
+						 	parent joints. </p>
 
 							<h4>Code Architecture</h4>
-							<p></p>
+							<p>We've developed a C# Windows Presentation Foundation(WPF) application that runs on the .NET Framework class library. It uses XAML(Extensible Aplication Markup Language)
+							for the GUI interface. This application runs on the Intel UP Board(with Windows 10) and can be configured to run on startup so that just turning on the UP Board will get the system operating.
+							Below is a list of four main components of this application.
+							</p>
 							<ol>
 								<li>Serial Initialization</li>
 								<li>Angle Detection</li>
@@ -90,9 +95,16 @@
 								<li>GUI Interface (MainWindow.xaml)</li>
 							</ol>
 							<h4>Code Deployment & Running the Application </h4>
+							<a href="https://github.com/SeunginLyu/MannyTheMan"><b> Here</b></a> is a link to our Github repository with all the latest source code available.<br>
+							Please feel to fork the repo for exploration and extension! <br>
+							We have setup an installation file under code/release that allows single-click installation of our application. <br>
+							Please make sure that you have all the dependencies listed above installed before you install our C# application.<br>
+							If you want to edit the application on your own and deploy your own,<br>
+							simply go to <u><b>Visual Studio -> Build -> Publish This App</b></u> to create your own release version.
 						</div>
+						<br>
 						<div class="inner"  id="electrical">
-							<h1>Electrical (Firmware)</h1>
+							<h1>Electrical & Firmware</h1>
 							<span class="image main"><img src="images/pic13.jpg" alt="" /></span>
 							<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu massa lacinia malesuada et a elit. Donec urna ex, lacinia in purus ac, pretium pulvinar mauris. Curabitur sapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit tristique.</p>
 							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus rutrum facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam tristique libero eu nibh porttitor fermentum. Nullam venenatis erat id vehicula viverra. Nunc ultrices eros ut ultricies condimentum. Mauris risus lacus, blandit sit amet venenatis non, bibendum vitae dolor. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In non lorem sit amet elit placerat maximus. Pellentesque aliquam maximus risus, vel venenatis mauris vehicula hendrerit.</p>
