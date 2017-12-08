@@ -64,19 +64,32 @@
 								<li><a href= "https://www.microsoft.com/en-us/download/details.aspx?id=40278">Kinect for Windows SDK v1.8</a></li>
 								<li>Supported OS : Windows 7, Windows 8, Windows 8.1, Windows 10, Windows Embedded Standard 7</li>
 								<li>.NET Framework 4 or Higher</li>
-								<li>(For Development Purpose Only) Visual Studio 2010 - 2017 with C#)</li>
+								<li>(For Development Purpose Only) Visual Studio 2010 - 2017 with C++ or C# dependencies installed. </li>
 							</ul>
-							<h4>How it Works</h4>
+							<h4>Kinect Joint Orientation Detecting : with Kinect SDK</h4>
 							<p><span class="image"><img src="images/kinect_example.png" alt="" /></span></p>
 							<p>Kinect SDK 1.8 for Windows provides a skeletal tracking module that allows Kinect to recognize people and follow their actions.
-							It uses the IR camera to track and locate the joints of the tracked users. The figure above illustrates the outline of skeleton that the system is capable of tracking.</p>
+							It uses the IR camera to track and locate the joints of the tracked users. It supports both C++ and C# support.
+							We used C# to write our kinect sensor interface because we were fairly new to both languages and C# had easier syntax and was used a lot in the Kinect community.
+							The figure above illustrates the outline of the skeleton heriarchy that the system is capable of tracking.</p>
+
 							<p><span class="image"><img src="images/kinect_example2.png" alt="" /></span><span class="image"><img src="images/kinect_example3.png" alt="" /></span></p>
 							<p>As illustrated in the figure above, each joint is given a name and is referenced by the corresponding names. We use the wrist joints, elbow joints, knee joints, and ankle joints (total of 8)
 							to accutate Manny. </p>
 							<p><span class="image"><img src="images/kinect_example4.png" alt="" /></span><span class="image"><img src="images/kinect_example5.png" alt="" /></span></p>
-							<p></p>
+							<p>The SDK provides two ways of accesing the the skeleton orientation (angles). One method provides a hierarchial rotation based on the joint relationships
+							defined on the skeleton joint structure, and the other method provides an absolute orientation in Kinect camera coordinates. The orientatation information is provided
+						  in form of quaternions and rotation matrices. In this program, since we are using only the 2D orientation,  </p>
+
 							<h4>Code Architecture</h4>
 							<p></p>
+							<ol>
+								<li>Serial Initialization</li>
+								<li>Angle Detection</li>
+								<li>Serial Communication </li>
+								<li>GUI Interface (MainWindow.xaml)</li>
+							</ol>
+							<h4>Code Deployment & Running the Application </h4>
 						</div>
 						<div class="inner"  id="electrical">
 							<h1>Electrical (Firmware)</h1>
