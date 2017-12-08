@@ -88,18 +88,28 @@
 							<p>We've developed a C# Windows Presentation Foundation(WPF) application that runs on the .NET Framework class library. It uses XAML(Extensible Aplication Markup Language)
 							for the GUI interface. This application runs on the Intel UP Board(with Windows 10) and can be configured to run on startup so that just turning on the UP Board will get the system operating.
 							Below is a list of four main components of this application with detailed explanation.
+							<p><span class="image"><img src="images/diagram.png" alt="" /></span></p>
 							</p>
 							<ol>
-								<li><h5>Serial Initialization</h5> <br>
-								<p></p>
+								<li><h5>Serial Initialization (MainWindow.xaml.cs) </h5> <br>
+								<p>This part of the code initializes the serial connection with the Arduino board. "DetectArduino()" function automatically detects
+								the COMP Port that Arduino is connected and then establishes the serial connection in "MainWindow()" function. The GUI will display "NOPORT"
+								if no Arduino connection was found.</p>
 								</li>
-								<li><h5>Angle Detection</h5> <br>
-								<p></p>
+								<li><h5>Angle Detection (MainWindow.xaml.cs)</h5> <br>
+								<iframe width="560" height="315" src="https://www.youtube.com/embed/el-KSq27318" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+								<p>The above video is a Kinect skeleton tracking demo. The "KinectSensorChooserKinectChanged" function looks for a connected Microsoft Kinect device,
+								then it establishes the SkeletonStream which triggers the "KinectSkeltonFrameReady" function when a person appears in the frame that is currently detecting.
+								</p>
+							</li><br>
+								<li><h5>Serial Communication (MainWindow.xaml.cs) </h5>
+								<p>Inside the "KinectSkeletonFrameReady" function, we send the joint angles in the form of serial output.
+								The serial output looks like this : "1,90,2,90,3,90,4,90,5,90,6,90,7,90,8,90", with the numbers being the joint number and the angle associated with that joint. </p>
+								<b> *In order to make sure that the serial output does not interrupt the Arduino from fully actuating all the servos,
+									we do a hand-shake communication and wait for a reply serial message from the Arduino that it sends when it has completed the servo actuation.</b>
 								</li>
-								<li><h5>Serial Communication<h5> <br>
-								<p></p>
-								</li>
-								<li><h5>GUI Interface (MainWindow.xaml)<h5> <br>
+								<li><h5>GUI Interface (MainWindow.xaml.cs)</h5> <br>
+								<p><span class="image"><img src="images/interface.png" alt="" /></span></p>
 								<p></p>
 								</li>
 							</ol>
@@ -140,7 +150,7 @@
 													<td>Wireless USB Wifi Micro Adapter Dongle</td>
 													<td> Connects Wifi to UP Board </td>
 													<td>1</td>
-												</tr>				
+												</tr>
 												<tr>
 													<td>Standard Servo</td>
 													<td> Connects to the Arduino and controls the pulley system</td>
