@@ -68,16 +68,17 @@
 							</ul>
 
 							<h4>Kinect Joint Orientation Detecting : with Kinect SDK</h4>
-							<p><span class="image"><img src="images/kinect_example.png" alt="" /></span></p>
+							<p><span class="image"><img src="images/kinect_example.png" alt="" /><cite>Source :https://msdn.microsoft.com/en-us/library/hh973074.aspx</cite></span></p>
+
 							<p>Kinect SDK 1.8 for Windows provides a skeletal tracking module that allows Kinect to recognize people and follow their actions.
 							It uses the IR camera to track and locate the joints of the tracked users. It supports both C++ and C# support.
 							We used C# to write our kinect sensor interface because we were fairly new to both languages and C# had easier syntax and was used a lot in the Kinect community.
 							The figure above illustrates the outline of the skeleton heriarchy that the system is capable of tracking.</p>
 
-							<p><span class="image"><img src="images/kinect_example2.png" alt="" /></span><span class="image"><img src="images/kinect_example3.png" alt="" /></span></p>
+							<p><span class="image"><img src="images/kinect_example2.png" alt="" /></span><span class="image"><img src="images/kinect_example3.png" alt="" /><cite>Source :https://msdn.microsoft.com/en-us/library/hh973073.aspx</cite></span></p>
 							<p>As illustrated in the figure above, each joint is given a name and is referenced by the corresponding names. We use the wrist joints, elbow joints, knee joints, and ankle joints (total of 8)
 							to accutate Manny. </p>
-							<p><span class="image"><img src="images/kinect_example4.png" alt="" /></span><span class="image"><img src="images/kinect_example5.png" alt="" /></span></p>
+							<p><span class="image"><img src="images/kinect_example4.png" alt="" /><cite>Source :https://msdn.microsoft.com/en-us/library/hh973073.aspx</cite></span><span class="image"><img src="images/kinect_example5.png" alt="" /></span></p>
 							<p>The SDK provides two ways of accesing the the skeleton orientation (angles). One method provides a hierarchial rotation based on the joint relationships
 							defined on the skeleton joint structure, and the other method provides an absolute orientation in Kinect camera coordinates. The orientatation information is provided
 						  in form of quaternions and rotation matrices. In this program, we use the hierarchial rotation information because we actuate the servos in orientations that are releative to their
@@ -86,13 +87,21 @@
 							<h4>Code Architecture</h4>
 							<p>We've developed a C# Windows Presentation Foundation(WPF) application that runs on the .NET Framework class library. It uses XAML(Extensible Aplication Markup Language)
 							for the GUI interface. This application runs on the Intel UP Board(with Windows 10) and can be configured to run on startup so that just turning on the UP Board will get the system operating.
-							Below is a list of four main components of this application.
+							Below is a list of four main components of this application with detailed explanation.
 							</p>
 							<ol>
-								<li>Serial Initialization</li>
-								<li>Angle Detection</li>
-								<li>Serial Communication </li>
-								<li>GUI Interface (MainWindow.xaml)</li>
+								<li><h5>Serial Initialization</h5> <br>
+								<p></p>
+								</li>
+								<li><h5>Angle Detection</h5> <br>
+								<p></p>
+								</li>
+								<li><h5>Serial Communication<h5> <br>
+								<p></p>
+								</li>
+								<li><h5>GUI Interface (MainWindow.xaml)<h5> <br>
+								<p></p>
+								</li>
 							</ol>
 							<h4>Code Deployment & Running the Application </h4>
 							<a href="https://github.com/SeunginLyu/MannyTheMan"><b> Here</b></a> is a link to our Github repository with all the latest source code available.<br>
@@ -109,7 +118,7 @@
 
 							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus rutrum facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam tristique libero eu nibh porttitor fermentum. Nullam venenatis erat id vehicula viverra. Nunc ultrices eros ut ultricies condimentum. Mauris risus lacus, blandit sit amet venenatis non, bibendum vitae dolor. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In non lorem sit amet elit placerat maximus. Pellentesque aliquam maximus risus, vel venenatis mauris vehicula hendrerit.</p>
 							<p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fersapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit tristique lorem ipsum dolor.</p>
-							
+
 								<h3>Bill of Materials</h3>
 									<div class="table-wrapper">
 										<table>
