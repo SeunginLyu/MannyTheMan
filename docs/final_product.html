@@ -23,7 +23,7 @@
 						<div class="inner">
 
 							<a href="index.html" class="logo">
-									<span class="symbol"><img src="images/logo.jpg" alt="" /></span><span class="title">Mannytheman</span>
+									<span class="symbol"><img src="images/robot.png" alt="" /></span><span class="title">Mannytheman</span>
 							</a>
 
 							<!-- Nav -->
@@ -68,17 +68,21 @@
 							</ul>
 
 							<h4>Kinect Joint Orientation Detecting : with Kinect SDK</h4>
-							<p><span class="image"><img src="images/kinect_example.png" alt="" /><cite>Source :https://msdn.microsoft.com/en-us/library/hh973074.aspx</cite></span></p>
+							<p><img style=" display: block; margin: 0 auto;" src="images/kinect_example.png" alt="" /><cite>Source :https://msdn.microsoft.com/en-us/library/hh973074.aspx</cite></p>
 
 							<p>Kinect SDK 1.8 for Windows provides a skeletal tracking module that allows Kinect to recognize people and follow their actions.
 							It uses the IR camera to track and locate the joints of the tracked users. It supports both C++ and C# support.
 							We used C# to write our kinect sensor interface because we were fairly new to both languages and C# had easier syntax and was used a lot in the Kinect community.
 							The figure above illustrates the outline of the skeleton heriarchy that the system is capable of tracking.</p>
 
-							<p><span class="image"><img src="images/kinect_example2.png" alt="" /></span><span class="image"><img src="images/kinect_example3.png" alt="" /><cite>Source :https://msdn.microsoft.com/en-us/library/hh973073.aspx</cite></span></p>
+							<p>
+							<img style=" display: block; margin: 0 auto;" src="images/kinect_example2.png" alt="" />
+							<img style=" display: block; margin: 0 auto;" src="images/kinect_example3.png" alt="" />
+							<cite>Source :https://msdn.microsoft.com/en-us/library/hh973073.aspx</cite></p>
 							<p>As illustrated in the figure above, each joint is given a name and is referenced by the corresponding names. We use the wrist joints, elbow joints, knee joints, and ankle joints (total of 8)
 							to accutate Manny. </p>
-							<p><span class="image"><img src="images/kinect_example4.png" alt="" /><cite>Source :https://msdn.microsoft.com/en-us/library/hh973073.aspx</cite></span><span class="image"><img src="images/kinect_example5.png" alt="" /></span></p>
+							<p><img style=" display: block; margin: 0 auto;" src="images/kinect_example4.png" alt="" /><cite>Source :https://msdn.microsoft.com/en-us/library/hh973073.aspx</cite>
+							<span class="image"><img src="images/kinect_example5.png" alt="" /></span></p>
 							<p>The SDK provides two ways of accesing the the skeleton orientation (angles). One method provides a hierarchial rotation based on the joint relationships
 							defined on the skeleton joint structure, and the other method provides an absolute orientation in Kinect camera coordinates. The orientatation information is provided
 						  in form of quaternions and rotation matrices. In this program, we use the hierarchial rotation information because we actuate the servos in orientations that are releative to their
@@ -88,7 +92,8 @@
 							<p>We've developed a C# Windows Presentation Foundation(WPF) application that runs on the .NET Framework class library. It uses XAML(Extensible Aplication Markup Language)
 							for the GUI interface. This application runs on the Intel UP Board(with Windows 10) and can be configured to run on startup so that just turning on the UP Board will get the system operating.
 							Below is a list of four main components of this application with detailed explanation.
-							<p><span class="image"><img src="images/diagram.png" alt="" /></span></p>
+							<p>
+							<img style=" display: block; margin: 0 auto;" src="images/diagram.png" alt="" /></p>
 							</p>
 							<ol>
 								<li><h5>Serial Initialization (MainWindow.xaml.cs) </h5> <br>
@@ -97,7 +102,10 @@
 								if no Arduino connection was found.</p>
 								</li>
 								<li><h5>Angle Detection (MainWindow.xaml.cs)</h5> <br>
-								<iframe width="560" height="315" src="https://www.youtube.com/embed/el-KSq27318" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+
+
+								<iframe width="560" style=" display: block; margin: 0 auto;" height="315" src="https://www.youtube.com/embed/el-KSq27318" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+								<br>
 								<p>The above video is a Kinect skeleton tracking demo. The "KinectSensorChooserKinectChanged" function looks for a connected Microsoft Kinect device,
 								then it establishes the SkeletonStream which triggers the "KinectSkeltonFrameReady" function when a person appears in the frame that is currently detecting.
 								</p>
@@ -129,7 +137,6 @@
 
 							<div>
 							<img src="images/ECE.png"alt="" style=" width:800px; display: block; margin: 0 auto;"/>
-							<span class="image main" ></span>
 							</div>
 							<p>Parts</p>
 
