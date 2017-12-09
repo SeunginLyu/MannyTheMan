@@ -126,8 +126,40 @@
 							<h1>Electrical & Firmware</h1>
 							<span class="image main"><img src="images/ECE.png"alt="" /></span>
 
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus rutrum facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam tristique libero eu nibh porttitor fermentum. Nullam venenatis erat id vehicula viverra. Nunc ultrices eros ut ultricies condimentum. Mauris risus lacus, blandit sit amet venenatis non, bibendum vitae dolor. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In non lorem sit amet elit placerat maximus. Pellentesque aliquam maximus risus, vel venenatis mauris vehicula hendrerit.</p>
-							<p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fersapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit tristique lorem ipsum dolor.</p>
+							<p>Parts</p>
+
+							<p>The above system diagram shows all the components of the electrical side of the project. A major part of this project was figuring out what components we would need. As referenced on our process page, one of our greatest learning points was that we should consider alternatives to electrical components instead of tightly holding on to our original idea. During our first sprint, we thought we wanted to use a Raspberry Pi as the “brain” of Manny. Basically, we needed a computer to receive input from the Kinect and then control the servos. It was not until after repeated tries that we figured out that the Raspberry Pi NOOBS operating system (among others) could not interface with the Kinect. While previous versions of the Kinect software were compatible with the Raspberry Pi, those libraries were no longer available or supported. Our series of attempts to make the Raspberry Pi work included
+							<div class="6u 12u$(medium)">
+								<ul>
+									<li>OpenKinect: no skeleton tracking</li>
+									<li>OpenNi, NiTE, SensorKinect: no longer supported</li>
+									<li>Windows SDK: requires Windows OS</li>
+								</ul>
+							</div>
+							</p><p>
+							The only real option for using the Kinect ended up being with the Windows SDK. However, the Raspberry Pi can only install Windows IoT Core, which is not robust enough to handle the Windows SDK program.
+							</p><p>
+							After several weeks of attempting to use the Raspberry Pi, one of our team members, Chole, suggested that we try an alternative to the Raspberry Pi.  We were reluctant to give up the work we had done on the Raspberry Pi already, but we knew that we needed to make a change. After extensive research we came across the UP Board. Chole also just so happened to have a UP Board from a separate project. She let us use her UP Board for testing before we bought our own. We knew from the specifications of the UP Board that it (depending on the version) had 1 GB to 4 GB of RAM, Windows operating system compatibility, 16 GB to 64 GB of hard disk space, and 1.92 GHz processing power. These specifications went above and beyond the Windows SDK requirements for 1GB of RAM,  Windows operating system, 4 GB of hard disk space, and 1.6 GHz processing speed. 
+							</p><p>
+							Altogether we realised that there a couple reasons the electrical team was being held back by the Raspberry Pi. Firstly, we were not familiar any other computing board. Secondly, we had already spent large amounts of time on research and on trying to make it work. As a result, we learned that it is often best to avoid “tunnel vision” when it comes to problems, and to be open to alternatives, especially if the first option is not working as anticipated. As a side point, we also learned the importance of sub-team communication. Without constant communication and integration between the software and electrical team on this issue, this problem would have been extended with significant repercussions.
+							</p><p>
+							Circuit
+							</p><p>
+							Above is our final circuit diagram. Our circuit began with using a GPIO Adapter and GPIO Cable to connect the Raspberry Pi to a breadboard. Our original plan was to both receive the information from the Kinect and control the servos on the Raspberry Pi. After talking to a teaching assistant, we found that the servos would be better controlled on a microcontroller like Arduino, which could easily interface with the Raspberry Pi. Furthermore, we knew that the Arduino had maximum ability to control 12 servos. Since our stretch goal was to control 16 limbs on Manny, we knew needed a shield on the board. After a bit of research we found that the Adafruit 16-Channel 12-bit PWM/Servo Shield would be perfect. A bit of soldering later a we had a shield on our Arduino. 
+							</p><p>
+							However, we ran into a problem when we started using four servos. The electrical team had neglected to consider the power needed to drive more than four servos. We had ordered a power supply of 5V 2A so it did not have a high enough current. This was an oversight on our part. We then ordered a 5V 10A power supply. In the end, the money was not wasted because we used the first power supply to power the UP Board. After this, we learned that it is critical to consider various peripheral components early, especially for a time sensitive project!
+							that we switched to the UP Board.
+							</p><p>
+							Sensor
+							</p><p>
+							Built into the Microsoft Kinect is a program for skeleton tracking. Many of the functions of the Kinect were above and beyond for our project. For colored images it has an RGB camera that stores in 1280x960 resolution. It uses an infrared (IR) emitter and an IR depth sensor for depth information measuring the distance between an object and the sensor. As part of its normal gaming function, it has a microphone for capturing sound. Because there are four microphones. Lastly, it has a 3-axis accelerometer to determine the current tilt of the Kinect itself. If you would like to read more about how we interpret the Kinect data, please refer to the software section of our website.
+							</p><p>
+							Firmware
+							</p><p>
+							We used an Arduino to control the eight servos that were connected to Manny. Originally, when we had used the raspberry pi to control the servos, we had a difficult time using PWM to control the servos. It was difficult to move the servos simultaneously and to specific angles. Eventually we wrote code that incremented the movement of each servo to be in eight degree spurts toward their desired angles. This gave the appearance that all the servos were moving simultaneously. However, once we transitioned back to Arduino, this process was much simpler. With the set-pwm function in Arduino we were able to simply set the desired angle for each servo and they would automatically move to the desired angle. Altogether, the switch from using Raspberry Pi to using the Arduino to control the servos significantly improved our servo control.
+							</p><p>
+							Another aspect of the servos calibration. We wanted manny to move in terms of angles between 0 and 180 and the servos PWM received values between 150 and 600. We ran two calibration test. The first one was semi-accurate and allowed us to test Manny. The second test we ran was to obtain precise accuracy for demo day.
+							</p>
 
 								<h3>Bill of Materials</h3>
 									<div class="table-wrapper">
