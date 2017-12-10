@@ -169,12 +169,16 @@
 							Firmware
 							</p><p>
 							We used an Arduino to control the eight servos that were connected to Manny. Originally, when we had used the raspberry pi to control the servos, we had a difficult time using PWM to control the servos. It was difficult to move the servos simultaneously and to specific angles. Eventually we wrote code that incremented the movement of each servo to be in eight degree spurts toward their desired angles. This gave the appearance that all the servos were moving simultaneously. However, once we transitioned back to Arduino, this process was much simpler. With the set-pwm function in Arduino we were able to simply set the desired angle for each servo and they would automatically move to the desired angle. Altogether, the switch from using Raspberry Pi to using the Arduino to control the servos significantly improved our servo control.
-							</p><p>
+							</p>
+							<p><span class="image right"><img src="images/ServoCalibration.jpg" alt="" />
+							<p>
 							Another aspect of the servos was calibration. We wanted manny to move in terms of angles between 0 and 180 and the servos PWM received values between 150 and 600. We ran two calibration test. The first one was semi-accurate and allowed us to run basic tests with Manny. The second test we ran was to obtain precise accuracy for demo day. We run two servos and gathered angles in relation to inputs at increments of 20. To the right is our calibration graph. 
 
-							<p><span class="image right"><img src="images/pic14.jpg" alt="" />
 
-							The linear equation we found for the relationship was: 
+
+							The linear equation we found for the relationship was: y = 2.7*x+83.
+							<br>
+							<br>
 
 							To see the Servo code, check out our Github repository at <a href="https://github.com/SeunginLyu/MannyTheMan/blob/master/MannyServoMotion.ino">MannyServoMotion.ino</a>
 							</p>
