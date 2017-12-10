@@ -133,7 +133,7 @@
 						<div class="inner"  id="electrical">
 							<h1>Electrical & Firmware</h1>
 
-							
+
 
 							<div>
 							<img src="images/ECE.png"alt="" style=" width:800px; display: block; margin: 0 auto;"/>
@@ -151,13 +151,13 @@
 							</p><p>
 							The only real option for using the Kinect ended up being with the Windows SDK. However, the Raspberry Pi can only install Windows IoT Core, which is not robust enough to handle the Windows SDK program.
 							</p><p>
-							After several weeks of attempting to use the Raspberry Pi, one of our team members, Chole, suggested that we try an alternative to the Raspberry Pi.  We were reluctant to give up the work we had done on the Raspberry Pi already, but we knew that we needed to make a change. After extensive research we came across the UP Board. Chole also just so happened to have a UP Board from a separate project. She let us use her UP Board for testing before we bought our own. We knew from the specifications of the UP Board that it (depending on the version) had 1 GB to 4 GB of RAM, Windows operating system compatibility, 16 GB to 64 GB of hard disk space, and 1.92 GHz processing power. These specifications went above and beyond the Windows SDK requirements for 1GB of RAM,  Windows operating system, 4 GB of hard disk space, and 1.6 GHz processing speed. 
+							After several weeks of attempting to use the Raspberry Pi, one of our team members, Chole, suggested that we try an alternative to the Raspberry Pi.  We were reluctant to give up the work we had done on the Raspberry Pi already, but we knew that we needed to make a change. After extensive research we came across the UP Board. Chole also just so happened to have a UP Board from a separate project. She let us use her UP Board for testing before we bought our own. We knew from the specifications of the UP Board that it (depending on the version) had 1 GB to 4 GB of RAM, Windows operating system compatibility, 16 GB to 64 GB of hard disk space, and 1.92 GHz processing power. These specifications went above and beyond the Windows SDK requirements for 1GB of RAM,  Windows operating system, 4 GB of hard disk space, and 1.6 GHz processing speed.
 							</p><p>
 							Altogether we realised that there a couple reasons the electrical team was being held back by the Raspberry Pi. Firstly, we were not familiar any other computing board. Secondly, we had already spent large amounts of time on research and on trying to make it work. As a result, we learned that it is often best to avoid “tunnel vision” when it comes to problems, and to be open to alternatives, especially if the first option is not working as anticipated. As a side point, we also learned the importance of sub-team communication. Without constant communication and integration between the software and electrical team on this issue, this problem would have been extended with significant repercussions.
 							</p><p>
 							Circuit
 							</p><p>
-							Above is our final circuit diagram. Our circuit began with using a GPIO Adapter and GPIO Cable to connect the Raspberry Pi to a breadboard. Our original plan was to both receive the information from the Kinect and control the servos on the Raspberry Pi. After talking to a teaching assistant, we found that the servos would be better controlled on a microcontroller like Arduino, which could easily interface with the Raspberry Pi. Furthermore, we knew that the Arduino had maximum ability to control 12 servos. Since our stretch goal was to control 16 limbs on Manny, we knew needed a shield on the board. After a bit of research we found that the Adafruit 16-Channel 12-bit PWM/Servo Shield would be perfect. A bit of soldering later a we had a shield on our Arduino. 
+							Above is our final circuit diagram. Our circuit began with using a GPIO Adapter and GPIO Cable to connect the Raspberry Pi to a breadboard. Our original plan was to both receive the information from the Kinect and control the servos on the Raspberry Pi. After talking to a teaching assistant, we found that the servos would be better controlled on a microcontroller like Arduino, which could easily interface with the Raspberry Pi. Furthermore, we knew that the Arduino had maximum ability to control 12 servos. Since our stretch goal was to control 16 limbs on Manny, we knew needed a shield on the board. After a bit of research we found that the Adafruit 16-Channel 12-bit PWM/Servo Shield would be perfect. A bit of soldering later a we had a shield on our Arduino.
 							</p><p>
 							However, we ran into a problem when we started using four servos. The electrical team had neglected to consider the power needed to drive more than four servos. We had ordered a power supply of 5V 2A so it did not have a high enough current. This was an oversight on our part. We then ordered a 5V 10A power supply. In the end, the money was not wasted because we used the first power supply to power the UP Board. After this, we learned that it is critical to consider various peripheral components early, especially for a time sensitive project!
 							that we switched to the UP Board.
@@ -172,7 +172,7 @@
 							</p>
 							<p><span class="image right"><img src="images/ServoCalibration.jpg" alt="" />
 							<p>
-							Another aspect of the servos was calibration. We wanted manny to move in terms of angles between 0 and 180 and the servos PWM received values between 150 and 600. We ran two calibration test. The first one was semi-accurate and allowed us to run basic tests with Manny. The second test we ran was to obtain precise accuracy for demo day. We run two servos and gathered angles in relation to inputs at increments of 20. To the right is our calibration graph. 
+							Another aspect of the servos was calibration. We wanted manny to move in terms of angles between 0 and 180 and the servos PWM received values between 150 and 600. We ran two calibration test. The first one was semi-accurate and allowed us to run basic tests with Manny. The second test we ran was to obtain precise accuracy for demo day. We run two servos and gathered angles in relation to inputs at increments of 20. To the right is our calibration graph.
 
 
 
@@ -183,10 +183,11 @@
 							To see the Servo code, check out our Github repository at <a href="https://github.com/SeunginLyu/MannyTheMan/blob/master/MannyServoMotion.ino">MannyServoMotion.ino</a>
 							</p>
 
-							<p>Insert Code Descption</p>
+							<p>One of the most useful functions to make the servo code work smoothly is Pulse Width Modulation(PWM). PWM signal is a digital square wave where the frequency is constant and it is used to control the power throughout the loads. It is extremely useful for providing variable speed control for motors. The signal is a high frequency square wave (>1KHz) that can be calculated using the duty cycle formula % Duty cycle = (ON/(ON + OFF)) *100. ON is when the square wave is high and OFF is the time for which the square wave is low. The duty cycle and power across the load are inverses of each other; duty cycle increases, the power is dropped and vice versa.</p>
+<p><span class="image right"><img src="images/PWM.PNG" alt="" />
 
-
-								<h3> Eletrical Bill of Materials</h3>
+<p>The PWM operates by taking the control signal(input) to change the values by controlling how much power should be applied to the load; in this case the Arduino is collaborating with the Kinect for the set values. </p>
+								<h3> Electrical Bill of Materials</h3>
 									<div class="table-wrapper">
 										<table>
 											<thead>
