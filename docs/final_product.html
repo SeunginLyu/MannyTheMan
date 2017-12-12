@@ -113,11 +113,11 @@
 								<li><h5>Serial Communication (MainWindow.xaml.cs) </h5>
 								<p>Inside the "KinectSkeletonFrameReady" function, we send the joint angles in the form of serial output.
 								The serial output looks like this : "1,90,2,90,3,90,4,90,5,90,6,90,7,90,8,90", with the numbers being the joint number and the angle associated with that joint. </p>
-								 *In order to make sure that the serial output does not interrupt the Arduino from fully actuating all the servos,
+								 Note : In order to make sure that the serial output does not interrupt the Arduino from fully actuating all the servos,
 									we do a hand-shake communication and wait for a reply serial message from the Arduino that it sends when it has completed the servo actuation.
 								</li>
 								<li><h5>GUI Interface (MainWindow.xaml.cs)</h5> <br>
-								<p><span class="image"><img src="images/interface.png" alt="" /></span></p>
+								<p><span  style=" width:800px; display: block; margin: 0 auto;"class="image"><img src="images/interface.png" alt="" /></span></p>
 								<p></p>
 								</li>
 							</ol>
